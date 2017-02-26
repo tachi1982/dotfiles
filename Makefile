@@ -5,7 +5,7 @@ all: zsh vim dotdir
 
 zsh: $(foreach f, $(filter .zsh%, $(DOT_FILES)), link-dot-file-$(f))
 
-vim: $(foreach f, $(filter .vim%, $(DOT_FILES)), link-dot-file-$(f))
+vim: $(foreach f, $(filter .vim%, $(DOT_FILES)), link-dot-file-$(f)) git-submodule-update
 
 dotdir: link-dot-dir
 
@@ -30,6 +30,9 @@ unlink-dot-file-%: %
 
 
 install-env-tools: install-home-brew
+
+git-submodule-update:
+	git submodule init && git submodule update
 
 install-home-brew:
 	ruby -e "`curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install`"
